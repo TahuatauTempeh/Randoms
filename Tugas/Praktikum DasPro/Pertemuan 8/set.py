@@ -89,6 +89,7 @@ def IsEqSet2(h1,h2) : # cek satu satu, h1 cek ke h2
             return False
         
 # def IsIntersect(h1,h2) :
+# idk mate, I'm tired
     
 
 #   APLIKASI
