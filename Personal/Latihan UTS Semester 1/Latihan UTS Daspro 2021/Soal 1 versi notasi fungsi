@@ -1,0 +1,37 @@
+DEFINISI DAN SPESIFIKASI
+DateofBirth : int[1...31], int[1...12], int > 1900 -> str
+    {DateofBirth(d,m,y) adalah fungsi yang membentuk sebuah tanggal, kemudian memberikan keluaran berupa string tanggal lahir.}
+
+DEFINISI FUNGSI PERANTARA
+NameofMonths : int [1...12] -> str
+    {NameofMonths(m) adalah fungsi untuk memunculkan nama bulan dalam bentuk alfabet dari bentuk angka.}
+IntToStr: integer  string
+    {IntToStr(x) mengkonversi integer x menjadi nilai string yang bersesuaian. Contoh: IntToStr(12) adalah '12'}
+
+REALISASI
+
+NameofMonths :
+    depend on m :
+        m = 1   : January
+        m = 2   : Februaru
+        m = 3   : March
+        m = 4   : April
+        m = 5   : May
+        m = 6   : June
+        m = 7   : July
+        m = 8   : August
+        m = 9   : September
+        m = 10  : Octobre
+        m = 11  : Novembre
+        m = 12  : Decembre
+
+DateofBirth(d,m,y):
+    IntToStr(d) + " " + NameofMonths + IntToStr(y) + " " IntToStr(y)
+
+APLIKASI
+DateofBirth(3,4,2006)
+DateofBirth(2,7,2008)
+
+% IsLeapYear? (a) :
+%     (a mod 4 = 0) and ((a mod 100 =! 0) or (a div 400 = 0))
+

@@ -1,0 +1,3 @@
+masuk = input('')
+
+print(masuk)

@@ -1,0 +1,9 @@
+type point: <x:int,y:int>
+
+SELEKTOR
+absis: point -> int
+{absis(c)}
+ordinat: point -> int
+
+konstruktor 
+makepoint: 2 int --> point
