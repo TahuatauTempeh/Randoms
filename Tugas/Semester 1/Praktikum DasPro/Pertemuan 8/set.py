@@ -5,11 +5,109 @@
 #   Deskripsi   = set
 
 #   DEFINISI TYPE
+#   type list : [ ] atau [e , list]
+#       {elemen di bagian awal diikuti oleh list di bagian akhir}
+#   type list : [ ] atau [list , e]
+#       {list di awal diikuti oleh elemen di akhir}
+
+#   DEFINISI DAN SPESIFIKASI KONSTRUKTOR
+#   Konso : elemen, list --> list
+#       {Konso(e, l) menghasilkan list dengan elemen e sebagai elemen pertama, diikuti l}
+#   Konsi : list, elemen --> list
+#       {Konsi(l, e) menghasilkan list l dengan elemen e sebagai elemen terakhir}
+
+#   DEFINISI DAN SPESIFIKASI SELEKTOR
+#   FirstElmt : list tidak kosong --> elemen
+#       {FirstElmt(l) mengembalikan elemen pertama dari list l}
+#   LastElmt : list tidak kosong --> elemen
+#       {LastElmt(l) mengembalikan elemen terakhir dari list l}
+#   Tail : list tidak kosong --> list
+#       {Tail(l) mengembalikan list tanpa elemen pertama dari l}
+#   Head : list tidak kosong --> list
+#       {Head(l) mengembalikan list tanpa elemen terakhir dari l}
+
+#   DEFINISI DAN SPESIFIKASI PREDIKAT
+#   IsEmpty : list --> boolean
+#       {IsEmpty(l) bernilai True jika list l kosong}
+#   IsMember : elemen, list --> boolean
+#       {IsMember(X, l) bernilai True jika X adalah anggota dari list l}
+
+#   DEFINISI DAN SPESIFIKASI FUNGSI
+#   NbElmt : list --> integer
+#       {NbElmt(l) menghasilkan jumlah elemen dalam list l}
+#   Rember : elemen, list --> list
+#       {Rember(x, l) menghapus elemen x pertama yang ditemukan di list l}
+#   Rember2 : elemen, list --> list
+#       {Rember2(x, l) menghapus elemen x terakhir yang ditemukan di list l}
+#   MultiRember : elemen, list --> list
+#       {MultiRember(x, l) menghapus semua kemunculan elemen x di list l}
+#   MakeSetIM : list --> list
+#       {MakeSetIM(l) menghasilkan list tanpa elemen duplikat dari list l menggunakan IsMember}
+#   MakeSetMR : list --> list
+#       {MakeSetMR(l) menghasilkan list tanpa elemen duplikat dari list l menggunakan MultiRember}
+#   KonsoSet : elemen, list --> list
+#       {KonsoSet(e, h) menambahkan elemen e ke list h jika e bukan anggota h}
+#   IsSet : list --> boolean
+#       {IsSet(l) bernilai True jika l adalah set (tidak ada elemen duplikat)}
+#   IsSubset : list, list --> boolean
+#       {IsSubset(h1, h2) bernilai True jika h1 merupakan subset dari h2}
+#   IsEqSet1 : list, list --> boolean
+#       {IsEqSet1(h1, h2) bernilai True jika h1 sama dengan h2 dengan cara cek subset}
+#   IsEqSet2 : list, list --> boolean
+#       {IsEqSet2(h1, h2) bernilai True jika h1 dan h2 sama elemen per elemen}
+#   IsIntersect : list, list --> boolean
+#       {IsIntersect(h1, h2) bernilai True jika h1 dan h2 memiliki elemen yang sama}
+#   MakeIntersectV1 : list, list --> list
+#       {MakeIntersectV1(h1, h2) menghasilkan list dengan elemen yang ada di h1 dan h2, cek ke h1}
+#   MakeIntersectV2 : list, list --> list
+#       {MakeIntersectV2(h1, h2) menghasilkan list dengan elemen yang ada di h1 dan h2, cek ke h2}
+#   MakeUnionV1 : list, list --> list
+#       {MakeUnionV1(h1, h2) menghasilkan gabungan dari list h1 dan h2, cek ke h1}
+#   MakeUnionV2 : list, list --> list
+#       {MakeUnionV2(h1, h2) menghasilkan gabungan dari list h1 dan h2, cek ke h2}
+#   NBIntersect : list, list --> integer
+#       {NBIntersect(h1, h2) menghasilkan jumlah elemen yang sama di antara h1 dan h2}
+#   NBUnion : list, list --> integer
+#       {NBUnion(h1, h2) menghasilkan jumlah elemen dari gabungan h1 dan h2 tanpa elemen duplikat}
 
 #   REALISASI
 
-from list_24060124140195a import *
+def Konso(e,l) :
+    return [e] + l
 
+def Konsi(l,e) :
+    return l + [e]
+
+def FirstElmt(l) :
+    return l[0]
+
+def LastElmt(l) :
+    return l[-1]
+
+def Tail(l) :
+    return l[1:]
+
+def Head(l) :
+    return l[:-1]
+
+def IsEmpty(l) :
+    return l == []
+    
+def NbElmt(l) :
+    if IsEmpty(l) :
+        return 0
+    else :
+        return 1 + NbElmt(Tail(l))
+
+def IsMember (X,l) :
+    if IsEmpty(l) :
+        return False
+    else :
+        if FirstElmt(l) == X :
+            return True
+        else :
+            return IsMember(X,Tail(l))
+    
 def Rember(x,l) :
     if IsEmpty(l) :
         return l
@@ -88,9 +186,63 @@ def IsEqSet2(h1,h2) : # cek satu satu, h1 cek ke h2
         else :
             return False
         
-# def IsIntersect(h1,h2) :
-# idk mate, I'm tired
+def IsIntersect(h1, h2) :
+    if IsEmpty(h1) :
+        return False
+    else :
+        if IsMember(FirstElmt(h1), h2) :
+            return True
+        else :
+            return IsIntersect(Tail(h1), h2)
+
+def MakeIntersectV1(h1, h2) : # rekursif ke h1
+    if IsEmpty(h1) :
+        return []
+    else : 
+        if IsMember(FirstElmt(h1), h2) :
+            return Konso(FirstElmt(h1), MakeIntersectV1(Tail(h1), h2))
+        else :
+            return MakeIntersectV1(Tail(h1), h2)
+
+def MakeIntersectV2(h1, h2) : #  rekursif ke h2
+    if IsEmpty(h2) :
+        return []
+    elif IsMember(FirstElmt(h2), h1) :
+        return Konso(FirstElmt(h2), MakeIntersectV2(h1, Tail(h2)))
+    else :
+        return MakeIntersectV2(h1, Tail(h2))
     
+def MakeUnionV1(h1, h2) : # rekursif h1
+    if IsEmpty(h1) :
+        return h2
+    else:
+        return KonsoSet(FirstElmt(h1), MakeUnionV1(Tail(h1), h2))
+
+def MakeUnionV2(h1, h2) : # rekursif h2
+    if IsEmpty(h2) :
+        return h1
+    else :
+        return KonsoSet(FirstElmt(h2), MakeUnionV2(h1, Tail(h2)))
+
+def NBIntersect(h1, h2) :
+    if IsEmpty(h1) :
+        return 0
+    else : 
+        if IsMember(FirstElmt(h1), h2):
+            return 1 + NBIntersect(Tail(h1), h2)
+        else :
+            return NBIntersect(Tail(h1), h2)
+
+def NBUnion(h1, h2) :
+    if IsEmpty(h1) : 
+        return NbElmt(h2) 
+    else : 
+        if IsMember(FirstElmt(h1), h2):  
+            return NBUnion(Tail(h1), h2)  
+        else :
+            return 1 + NBUnion(Tail(h1), h2)  
+
+
 
 #   APLIKASI
 print('=' * 120)
@@ -127,3 +279,21 @@ print('=' * 120)
 print(f"Apakah equal cek satu satu : {IsEqSet2([1,2,3],[1,2,3])}")
 print(f"Apakah equal cek satu satu : {IsEqSet2([1,3,5],[1,2,3])}")
 print('=' * 120)
+print(f"Apakah Intersect : {IsIntersect([2,3,4],[1,2,3,4,5])}")
+print(f"Apakah Intersect : {IsIntersect([6,7,8],[1,2,3,4,5])}")
+print('=' * 120)    
+print(f"Make Intersect : {MakeIntersectV1([1,2],[2,3,4])}")
+print(f"Make Intersect : {MakeIntersectV1([1,3,4],[2,3,4])}")
+print('=' * 120)   
+print(f"Make Intersect : {MakeIntersectV2([1,3,4],[2,3,4])}")
+print(f"Make Intersect : {MakeIntersectV2([1,2],[2,3,4])}")
+print('=' * 120)   
+print(f"Make Union terhadap h1 : {MakeUnionV1([1,2],[2,3,4])}")
+print('=' * 120)   
+print(f"Make Union terhadap h2 : {MakeUnionV2([1,2,6],[2,3,4])}")
+print('=' * 120)  
+print(f"NbIntersect : {NBIntersect([1,2,3,4],[1,2,3,4,5,6])}")
+print('=' * 120)  
+print(f"NbUnion : {NBUnion([1,2,3],[3,2])}")
+print('=' * 120)  
+print(f"{NBUnion([1,2,3],[3,4,5])}")
