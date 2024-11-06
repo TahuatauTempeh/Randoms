@@ -296,6 +296,6 @@ print(f"NbIntersect : {NBIntersect([1,2,3,4],[1,2,3,4,5,6])}")
 print('=' * 120)  
 print(f"NbUnion : {NBUnion([1,2,3],[3,2])}")
 print('=' * 120)  
-print(f"{NBUnion([1,2,3],[3,4,5])}")
+print(f"NBUnion : {NBUnion([1,2,3],[3,4,5])}")
 
 # dsadsajdasjdajsd
