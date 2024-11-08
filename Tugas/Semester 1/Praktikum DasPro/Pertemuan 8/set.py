@@ -5,70 +5,64 @@
 #   Deskripsi   = set
 
 #   DEFINISI TYPE
-#   type list : [ ] atau [e , list]
-#       {elemen di bagian awal diikuti oleh list di bagian akhir}
-#   type list : [ ] atau [list , e]
-#       {list di awal diikuti oleh elemen di akhir}
+#   type list : [ ] or [e , list]
+#       {elemen di bagian awal dan list di bagian akhir}
+#   type list : [ ] or [list , e]
+#       {elemen di akhir dan list di awal}
+#   type set : [ ] or [e, set] 
+#       {set adalah list yang tidak mengandung elemen berulang dan urutan elemen tidak diperhitungkan}
 
-#   DEFINISI DAN SPESIFIKASI KONSTRUKTOR
-#   Konso : elemen, list --> list
-#       {Konso(e, l) menghasilkan list dengan elemen e sebagai elemen pertama, diikuti l}
-#   Konsi : list, elemen --> list
-#       {Konsi(l, e) menghasilkan list l dengan elemen e sebagai elemen terakhir}
 
-#   DEFINISI DAN SPESIFIKASI SELEKTOR
-#   FirstElmt : list tidak kosong --> elemen
+#  DEFINISI DAN SPESIFIKASI FUNGSI DASAR LIST
+#   Konso: elemen, list -> list
+#       {Konso(e, l) menambahkan elemen e di awal list l}
+#   Konsi: list, elemen -> list
+#       {Konsi(l, e) menambahkan elemen e di akhir list l}
+#   FirstElmt: list tidak kosong -> elemen
 #       {FirstElmt(l) mengembalikan elemen pertama dari list l}
-#   LastElmt : list tidak kosong --> elemen
+#   LastElmt: list tidak kosong -> elemen 
 #       {LastElmt(l) mengembalikan elemen terakhir dari list l}
-#   Tail : list tidak kosong --> list
-#       {Tail(l) mengembalikan list tanpa elemen pertama dari l}
-#   Head : list tidak kosong --> list
-#       {Head(l) mengembalikan list tanpa elemen terakhir dari l}
+#   Tail: list tidak kosong -> list
+#       {Tail(l) mengembalikan list tanpa elemen pertama dari list l}
+#   Head: list tidak kosong -> list
+#       ead(l) mengembalikan list tanpa elemen terakhir dari list l}
+#   IsEmpty: list -> boolean
+#       {IsEmpty(l) mengembalikan True jika l adalah list kosong}
+#   NbElmt: list -> integer
+#       {NbElmt(l) menghitung jumlah elemen pada list l}
+
+#   DEFINISI DAN SPESIFIKASI OPERASI LIST YANG DIPERLUKAN UNTUK HIMPUNAN
+#   Rember: elemen, list -> list
+#       {Rember(x,L) menghapus sebuah elemen x dari list L. Jika x ada di list L, maka elemen L berkurang 1. Jika x tidak ada di list L maka L tetap. List kosong tetap menjadi list kosong.}
+#   MultiRember: elemen, list -> list
+#       {MultiRember(x,L) menghapus semua kemunculan elemen x dari list L. List baru yang dihasilkan tidak lagi memiliki elemen x. List kosong tetap menjadi list kosong.}
+
+#   DEFINISI DAN SPESIKASI KONSTRUKTOR SET DARI LIST
+#   MakeSet: list -> set
+#       {MakeSet(L) membuat set dari list L dengan menghapus semua kemunculan lebih dari satu kali. list kosong tetap menjadi himpunan kosong}
+
+#   DEFINISI DAN SPESIKASI KONSTRUKTOR SET
+#   KonsoSet: elemen,set -> set
+#       {konsoSet(e,H) menambahkan sebuah elemen e sebagai elemen pertama set H dengan syarat e belum ada di dalam himpunan H}
 
 #   DEFINISI DAN SPESIFIKASI PREDIKAT
-#   IsEmpty : list --> boolean
-#       {IsEmpty(l) bernilai True jika list l kosong}
-#   IsMember : elemen, list --> boolean
-#       {IsMember(X, l) bernilai True jika X adalah anggota dari list l}
-
-#   DEFINISI DAN SPESIFIKASI FUNGSI
-#   NbElmt : list --> integer
-#       {NbElmt(l) menghasilkan jumlah elemen dalam list l}
-#   Rember : elemen, list --> list
-#       {Rember(x, l) menghapus elemen x pertama yang ditemukan di list l}
-#   Rember2 : elemen, list --> list
-#       {Rember2(x, l) menghapus elemen x terakhir yang ditemukan di list l}
-#   MultiRember : elemen, list --> list
-#       {MultiRember(x, l) menghapus semua kemunculan elemen x di list l}
-#   MakeSetIM : list --> list
-#       {MakeSetIM(l) menghasilkan list tanpa elemen duplikat dari list l menggunakan IsMember}
-#   MakeSetMR : list --> list
-#       {MakeSetMR(l) menghasilkan list tanpa elemen duplikat dari list l menggunakan MultiRember}
-#   KonsoSet : elemen, list --> list
-#       {KonsoSet(e, h) menambahkan elemen e ke list h jika e bukan anggota h}
-#   IsSet : list --> boolean
-#       {IsSet(l) bernilai True jika l adalah set (tidak ada elemen duplikat)}
-#   IsSubset : list, list --> boolean
-#       {IsSubset(h1, h2) bernilai True jika h1 merupakan subset dari h2}
-#   IsEqSet1 : list, list --> boolean
-#       {IsEqSet1(h1, h2) bernilai True jika h1 sama dengan h2 dengan cara cek subset}
-#   IsEqSet2 : list, list --> boolean
-#       {IsEqSet2(h1, h2) bernilai True jika h1 dan h2 sama elemen per elemen}
-#   IsIntersect : list, list --> boolean
-#       {IsIntersect(h1, h2) bernilai True jika h1 dan h2 memiliki elemen yang sama}
-#   MakeIntersectV1 : list, list --> list
-#       {MakeIntersectV1(h1, h2) menghasilkan list dengan elemen yang ada di h1 dan h2, cek ke h1}
-#   MakeIntersectV2 : list, list --> list
-#       {MakeIntersectV2(h1, h2) menghasilkan list dengan elemen yang ada di h1 dan h2, cek ke h2}
-#   MakeUnionV1 : list, list --> list
-#       {MakeUnionV1(h1, h2) menghasilkan gabungan dari list h1 dan h2, cek ke h1}
-#   MakeUnionV2 : list, list --> list
-#       {MakeUnionV2(h1, h2) menghasilkan gabungan dari list h1 dan h2, cek ke h2}
-#   NBIntersect : list, list --> integer
-#       {NBIntersect(h1, h2) menghasilkan jumlah elemen yang sama di antara h1 dan h2}
-#   NBUnion : list, list --> integer
-#       {NBUnion(h1, h2) menghasilkan jumlah elemen dari gabungan h1 dan h2 tanpa elemen duplikat}
+#   IsSet: list -> boolean
+#       {IsSet(L) mengembalikan true jika L adalah sebuah set}
+#   IsSubset: 2 set -> boolean
+#       {IsSubset(H1,H2) mengembalikan true jika H1 merupakan subset dari H2}
+#   IsEqualSet: 2 set -> boolean
+#       {IsEqualSet(H1,H2} benar jika H1 adalah set yang sama dengan H2}
+#   IsIntersect: 2 set -> boolean
+#       {IsIntersect(H1,H2) benar jika H1 beririsan dengan H2}
+#   DEFINISI DAN SPESIFIKASI OPERASI TERHADAP HIMPUNAN 
+#   MakeIntersect: 2 set -> set
+#       {MakeIntersect(H1,H2) menghasilkan set baru yang merupakan hasil irisan antara H1 dan H2}
+#   MakeUnion: 2 set -> set
+#       {MakeUnion(H1,H2) menghasilkan set baru yang merupakan hasil gabungan antara H1 dan H2}
+#   NBIntersect: 2 set -> integer 
+#       {NBIntersect(H1,H2) menghasilkan jumlah elemen yang beririsan pada H1 dan H2 tanpa memanfaatkan fungsi MakeIntersect(H1,H2).}
+#   NBUnion: 2 set -> integer
+#       {NBUnion(H1,H2) menghasilkan jumlah elemen hasil gabungan antara H1 dan H2 tanpa memanfaatkan fungsi MakeUnion(H1,H2)}
 
 #   REALISASI
 
@@ -241,7 +235,6 @@ def NBUnion(h1, h2) :
             return NBUnion(Tail(h1), h2)  
         else :
             return 1 + NBUnion(Tail(h1), h2)  
-
 
 
 #   APLIKASI
