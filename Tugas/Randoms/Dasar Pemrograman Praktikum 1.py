@@ -1,3 +1,0 @@
-masuk = input('')
-
-print(masuk)
