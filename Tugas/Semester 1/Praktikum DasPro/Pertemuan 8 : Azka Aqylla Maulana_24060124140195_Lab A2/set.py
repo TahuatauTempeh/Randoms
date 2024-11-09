@@ -13,7 +13,7 @@
 #       {set adalah list yang tidak mengandung elemen berulang dan urutan elemen tidak diperhitungkan}
 
 
-#  DEFINISI DAN SPESIFIKASI FUNGSI DASAR LIST
+#   DEFINISI DAN SPESIFIKASI FUNGSI DASAR LIST
 #   Konso: elemen, list -> list
 #       {Konso(e, l) menambahkan elemen e di awal list l}
 #   Konsi: list, elemen -> list
