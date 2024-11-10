@@ -54,6 +54,7 @@
 #       {IsEqualSet(H1,H2} benar jika H1 adalah set yang sama dengan H2}
 #   IsIntersect: 2 set -> boolean
 #       {IsIntersect(H1,H2) benar jika H1 beririsan dengan H2}
+
 #   DEFINISI DAN SPESIFIKASI OPERASI TERHADAP HIMPUNAN 
 #   MakeIntersect: 2 set -> set
 #       {MakeIntersect(H1,H2) menghasilkan set baru yang merupakan hasil irisan antara H1 dan H2}
@@ -201,10 +202,11 @@ def MakeIntersectV1(h1, h2) : # rekursif ke h1
 def MakeIntersectV2(h1, h2) : #  rekursif ke h2
     if IsEmpty(h2) :
         return []
-    elif IsMember(FirstElmt(h2), h1) :
-        return Konso(FirstElmt(h2), MakeIntersectV2(h1, Tail(h2)))
     else :
-        return MakeIntersectV2(h1, Tail(h2))
+        if IsMember(FirstElmt(h2), h1) :
+            return Konso(FirstElmt(h2), MakeIntersectV2(h1, Tail(h2)))
+        else :
+            return MakeIntersectV2(h1, Tail(h2))
     
 def MakeUnionV1(h1, h2) : # rekursif h1
     if IsEmpty(h1) :
