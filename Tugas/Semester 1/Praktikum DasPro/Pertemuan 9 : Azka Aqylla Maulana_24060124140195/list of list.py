@@ -1,51 +1,3 @@
-def Konso(e,l) :
-    return [e] + l
-
-def Konsi(l,e) :
-    return l + [e]
-
-def FirstElmt(l) :
-    return l[0]
-
-def LastElmt(l) :
-    return l[-1]
-
-def Tail(l) :
-    return l[1:]
-
-def Head(l) :
-    return l[:-1]
-
-def IsEmpty(s) :
-    return s == []
-
-def IsOneElmt(l) :
-    if IsEmpty(l) :
-        return False
-    else :
-        return Tail(l) == [] and Head(l) == []
-    
-def NbElmt(l) :
-    if IsEmpty(l) :
-        return 0
-    else :
-        return 1 + NbElmt(Tail(l))
-    
-def ElmtKeN(N,l) :
-    if N == 1 :
-        return FirstElmt(l)
-    else :
-        return ElmtKeN(N - 1, Tail(l))
-    
-def IsMember (X,l) :
-    if IsEmpty(l) :
-        return False
-    else :
-        if FirstElmt(l) == X :
-            return True
-        else :
-            return IsMember(X,Tail(l))
-        
 def isAtom(s) :
     return type(s) != list
 
@@ -70,6 +22,18 @@ def TailList(s) :
 def HeadList(s) :
     return s[:-1]
 
+def IsEmpty(s) :
+    return s == []
+    
+def IsMember (X,l) :
+    if IsEmpty(l) :
+        return False
+    else :
+        if FirstElmt(l) == X :
+            return True
+        else :
+            return IsMember(X,Tail(l))
+
 def IsEqual(s1,s2) :
     if NbElmt(s1) == NbElmt(s2) :
         if IsEmpty(s1) and IsEmpty(s2) :
@@ -91,6 +55,10 @@ def IsMemberList(l,s) :
             else :
                 return IsMemberList(l,Tail(s))
 
+# def IsEqS(s1,s2)
+
 # dasdasdasdas
 
+print(isList([1,2,3,4,5,5,5,6]))
+print(isAtom([3,2,3]))
 print(IsMemberList(2,[2,3,4]))
