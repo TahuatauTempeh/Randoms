@@ -60,3 +60,5 @@ def KonsLi(s,l) :
 
 def FirstList(s) :
     return s[0]
+
+# dasdasdasdas
