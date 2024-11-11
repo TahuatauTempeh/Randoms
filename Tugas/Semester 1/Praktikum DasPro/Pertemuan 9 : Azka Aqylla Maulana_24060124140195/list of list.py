@@ -58,4 +58,5 @@ def KonsLo(l,s) :
 def KonsLi(s,l) :
     return s + [l]
 
-def 
+def FirstList(s) :
+    return s[0]
