@@ -70,6 +70,27 @@ def TailList(s) :
 def HeadList(s) :
     return s[:-1]
 
+def IsEqual(s1,s2) :
+    if NbElmt(s1) == NbElmt(s2) :
+        if IsEmpty(s1) and IsEmpty(s2) :
+            return True
+        else :
+            return FirstElmt(s1) == FirstElmt(s2) and IsEqual(Tail(s1),Tail(s2))
+    else :
+        False
 
+def IsMemberList(l,s) :
+    if IsEmpty(s) :
+        return False
+    else :
+        if isAtom(FirstList(s)) :
+            return IsMemberList(l,TailList(s))
+        else :
+            if IsEqual(FirstList(s)) :
+                return True
+            else :
+                return IsMemberList(l,Tail(s))
 
 # dasdasdasdas
+
+print(IsMemberList(2,[2,3,4]))
