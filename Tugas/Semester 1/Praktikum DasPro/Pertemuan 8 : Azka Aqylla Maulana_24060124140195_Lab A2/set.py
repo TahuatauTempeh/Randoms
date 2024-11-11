@@ -294,3 +294,4 @@ print('=' * 120)
 print(f"NBUnion : {NBUnion([1,2,3],[3,4,5])}")
 
 # dsadsajdasjdajsd
+# print(Konso(LastElmt([7,8,9,10]), MultiRember(2,[2,3,1,4,2,4,1])))
