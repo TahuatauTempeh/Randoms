@@ -55,10 +55,29 @@ def IsMemberList(l,s) :
             else :
                 return IsMemberList(l,Tail(s))
 
-# def IsEqS(s1,s2)
-
+def IsEqS(s1,s2) :
+    if IsEmpty(s1) and IsEmpty(s2) :
+        return True
+    else :
+        if IsEmpty(s1) and not IsEmpty(s2) :
+           return False
+        else :
+            if not IsEmpty(s1) and IsEmpty(s2) :
+                return False
+            else :
+                if isAtom(FirstList(s1)) and isAtom(FirstList(s2)) :
+                    if FirstList(s1) == FirstList(s2) :
+                        return IsEqS(TailList(s1),TailList(s2))
+                    else :
+                        return False
+                else :
+                    if isList(FirstList(s1)) and isList(FirstList(s2)) :
+                        return IsEqS(FirstList(s1),FirstList(s2)) and IsEqS(LastList(s1),LastList(s2))
+                    else :
+                        return False
 # dasdasdasdas
 
 print(isList([1,2,3,4,5,5,5,6]))
 print(isAtom([3,2,3]))
 print(IsMemberList(2,[2,3,4]))
+print(IsEqS([[2,3],2,3,4],[2,3,[2,3],4]))
