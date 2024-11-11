@@ -61,4 +61,15 @@ def KonsLi(s,l) :
 def FirstList(s) :
     return s[0]
 
+def LastList(s) :
+    return s[-1]
+
+def TailList(s) :
+    return s[1:] 
+
+def HeadList(s) :
+    return s[:-1]
+
+
+
 # dasdasdasdas
