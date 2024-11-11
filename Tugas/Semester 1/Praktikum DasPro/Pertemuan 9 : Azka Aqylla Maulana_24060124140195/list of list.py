@@ -58,3 +58,4 @@ def KonsLo(l,s) :
 def KonsLi(s,l) :
     return s + [l]
 
+def 
