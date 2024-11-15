@@ -43,17 +43,17 @@ def IsEqual(s1,s2) :
     else :
         False
 
-def IsMemberList(l,s) :
+def IsMemberLS(l,s) :
     if IsEmpty(s) :
         return False
     else :
         if isAtom(FirstList(s)) :
-            return IsMemberList(l,TailList(s))
+            return IsMemberLS(l,TailList(s))
         else :
             if IsEqual(FirstList(s)) :
                 return True
             else :
-                return IsMemberList(l,Tail(s))
+                return IsMemberLS(l,Tail(s))
 
 def IsEqS(s1,s2) :
     if IsEmpty(s1) and IsEmpty(s2) :
@@ -75,6 +75,84 @@ def IsEqS(s1,s2) :
                         return IsEqS(FirstList(s1),FirstList(s2)) and IsEqS(LastList(s1),LastList(s2))
                     else :
                         return False
+                    
+def IsMemberS(x, S):
+    if IsEmpty(S):
+        return False
+    else:
+        if isAtom(FirstList(S)):
+            return FirstList(S) == x or IsMemberS(x, TailList(S))
+        else:
+            return IsMemberS(x, FirstList(S)) or IsMemberS(x, TailList(S))
+
+def Rember(x, S):
+    if IsEmpty(S):
+        return []
+    else:
+        if isAtom(FirstList(S)):
+            if FirstList(S) == x:
+                return Rember(x, TailList(S))
+            else:
+                return KonsLo(FirstList(S), Rember(x, TailList(S)))
+        else:
+            return KonsLo(Rember(x, FirstList(S)), Rember(x, TailList(S)))
+
+def Max(S):
+    if IsEmpty(S):
+        return float('-inf')  # Nilai kecil sebagai batas awal
+    else:
+        if isAtom(FirstList(S)):
+            return max(FirstList(S), Max(TailList(S)))
+        else:
+            return max(Max(FirstList(S)), Max(TailList(S)))
+
+def NBElmtAtom(S):
+    if IsEmpty(S):
+        return 0
+    else:
+        if isAtom(FirstList(S)):
+            return 1 + NBElmtAtom(TailList(S))
+        else:
+            return NBElmtAtom(FirstList(S)) + NBElmtAtom(TailList(S))
+
+def NBElmtList(S):
+    if IsEmpty(S):
+        return 0
+    else:
+        if isList(FirstList(S)):
+            return 1 + NBElmtList(TailList(S))
+        else:
+            return NBElmtList(TailList(S))
+
+def SumLoL(S):
+    if IsEmpty(S):
+        return 0
+    else:
+        if isAtom(FirstList(S)):
+            return FirstList(S) + SumLoL(TailList(S))
+        else:
+            return SumLoL(FirstList(S)) + SumLoL(TailList(S))
+
+def MaxNBElmtList(S):
+    if IsEmpty(S):
+        return 0
+    else:
+        if isList(FirstList(S)):
+            return max(len(FirstList(S)), MaxNBElmtList(TailList(S)))
+        else:
+            return MaxNBElmtList(TailList(S))
+
+
+def MaxSumElmt(S):
+    if IsEmpty(S):
+        return float('-inf')  # Nilai kecil sebagai batas awal
+    else:
+        if isAtom(FirstList(S)):
+            return max(FirstList(S), MaxSumElmt(TailList(S)))
+        else:
+            return max(SumLoL(FirstList(S)), MaxSumElmt(TailList(S)))
+
+
 # dasdasdasdas
 
 print(isList([1,2,3,4,5,5,5,6]))
