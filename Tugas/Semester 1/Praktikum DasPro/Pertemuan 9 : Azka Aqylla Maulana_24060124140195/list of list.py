@@ -5,22 +5,6 @@
 #   Deskripsi   = list of list :0
 
 
-#   IsAtom : list of list -> boolean
-#       {IsAtom(s) benar jika s adalah atom(integer lah basically, not list)}
-def isAtom(s) :
-    return type(s) != list
-
-print(f"IsAtom : {isAtom([3,2,3])}")
-print('-' * 120)
-
-#   IsList : list of list -> boolean
-#       {IsList(s) benar jika s adalah list}
-def isList(s) :
-    return type(s) == list
-
-print(f"IsList : {isList([1,2,3,4,5,5,5,6])}")
-print('-' * 120)
-
 #   KonLo : list, list of list, -> list of list
 #       {KonsLo(l,s) menambahkan list l kepada list s di di awal}
 def KonsLo(l,s) :
@@ -68,6 +52,23 @@ def HeadList(s) :
 
 print(f"HeadList : {HeadList([1,2,3,4])}")
 print('-' * 120)
+
+#   IsAtom : list of list -> boolean
+#       {IsAtom(s) benar jika s adalah atom(integer lah basically, not list)}
+def isAtom(s) :
+    return type(s) != list
+
+print(f"IsAtom : {isAtom(FirstList([3,2,3]))}")
+print('-' * 120)
+
+#   IsList : list of list -> boolean
+#       {IsList(s) benar jika s adalah list}
+def isList(s) :
+    return type(s) == list
+
+print(f"IsList : {isList(FirstList([1,2,3,4,5,5,5,6]))}")
+print('-' * 120)
+
 
 #   IsEmpty : list of list -> boolean
 #       {IsEmpty(s) benar jika s kosong}
