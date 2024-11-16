@@ -114,7 +114,7 @@ def IsMemberLS(l,s) :
             if IsEqual(FirstList(s),l) :
                 return True
             else :
-                return IsMemberLS(l,Tail(s))
+                return IsMemberLS(l,TailList(s))
             
 print(f"IsmemberLS : {IsMemberLS([1,2],[[1,2],3,[4],5])}")
 print('-' * 120)
