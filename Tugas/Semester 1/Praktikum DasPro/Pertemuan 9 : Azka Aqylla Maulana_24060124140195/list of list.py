@@ -11,6 +11,8 @@ def KonsLo(l,s) :
     return [l] + s
 
 print(f"Konslo : {KonsLo([3,4],[1,2,5])}")
+print(f"Konslo : {KonsLo([1],[1,2,5])}")
+print(f"Konslo : {KonsLo([2,5],[1,2,5])}")
 print('-' * 120)
 
 #   KonsLi : list of list, list -> list of list
@@ -19,6 +21,8 @@ def KonsLi(s,l) :
     return s + [l]
 
 print(f"Konsli : {KonsLi([1,2],[1,2,3])}")
+print(f"Konsli : {KonsLi([1],[1,2,5])}")
+print(f"Konsli : {KonsLi([2,5],[1,2,5])}")
 print('-' * 120)
 
 #   FirstList : list tidak kosong -> list
@@ -27,6 +31,8 @@ def FirstList(s) :
     return s[0]
 
 print(f"FirstList : {FirstList([1,2,3,4])}")
+print(f"FirstList : {FirstList([[6,7],8])}")
+print(f"FirstList : {FirstList([7,9,2])}")
 print('-' * 120)
 
 #   LastList : list tidak kosong -> list
@@ -35,6 +41,8 @@ def LastList(s) :
     return s[-1]
 
 print(f"LastList : {LastList([1,2,3,4])}")
+print(f"LastList : {LastList([1,2,3,[4,5]])}")
+print(f"LastList : {LastList([1,2,3,[7,8,9]])}")
 print('-' * 120)
 
 #   TailList : list tidak kosong -> list
@@ -43,6 +51,8 @@ def TailList(s) :
     return s[1:] 
 
 print(f"TailList : {TailList([1,2,3,4])}")
+print(f"TailList : {TailList([{1,2},2,3,4])}")
+print(f"TailList : {TailList([1,{2,3,5},3,4])}")
 print('-' * 120)
 
 #   HeadList : list tidak kosong -> list
@@ -51,6 +61,8 @@ def HeadList(s) :
     return s[:-1]
 
 print(f"HeadList : {HeadList([1,2,3,4])}")
+print(f"HeadList : {HeadList([3,[4,5]])}")
+print(f"HeadList : {HeadList([1])}")
 print('-' * 120)
 
 #   IsAtom : list of list -> boolean
@@ -59,6 +71,8 @@ def isAtom(s) :
     return type(s) != list
 
 print(f"IsAtom : {isAtom(FirstList([3,2,3]))}")
+print(f"IsAtom : {isAtom(FirstList([[3,5,7],2,3]))}")
+print(f"IsAtom : {isAtom(FirstList([3,[2,7],3]))}")
 print('-' * 120)
 
 #   IsList : list of list -> boolean
@@ -67,6 +81,8 @@ def isList(s) :
     return type(s) == list
 
 print(f"IsList : {isList(FirstList([1,2,3,4,5,5,5,6]))}")
+print(f"IsList : {isList(FirstList([[1,2],3]))}")
+print(f"IsList : {isList(FirstList([[9],[2,3],3]))}")
 print('-' * 120)
 
 
@@ -76,6 +92,8 @@ def IsEmpty(s) :
     return s == []
 
 print(f"IsEmpty : {IsEmpty([3,4,2])}") 
+print(f"IsEmpty : {IsEmpty([])}") 
+print(f"IsEmpty : {IsEmpty([[3]])}") 
 print('-' * 120)   
 
 #   NBElmt : list -> integer
@@ -87,6 +105,8 @@ def NbElmt(s) :
         return 1 + NbElmt(TailList(s))
 
 print(f"NbElmt : {NbElmt([1,2,3,4,5])}")
+print(f"NbElmt : {NbElmt([1,[1,2],1,1,1])}")
+print(f"NbElmt : {NbElmt([[1,1,1,1,1]])}")
 print('-' * 120)
 
 #   IsEqual : list, list -> boolean
@@ -101,6 +121,8 @@ def IsEqual(s1,s2) :
         return False
     
 print(f"IsEqual : {IsEqual([2,3],[2,3,4])}")
+print(f"IsEqual : {IsEqual([2,3,4],[2,3,4])}")
+print(f"IsEqual : {IsEqual([],[])}")
 print('-' * 120)
 
 #   IsMemberLS : list, list of list -> boolean
@@ -118,32 +140,31 @@ def IsMemberLS(l,s) :
                 return IsMemberLS(l,TailList(s))
             
 print(f"IsmemberLS : {IsMemberLS([1,2],[[1,2],3,[4],5])}")
+print(f"IsmemberLS : {IsMemberLS([1,2],[1,2,3])}")
+print(f"IsmemberLS : {IsMemberLS([],[1,[2,3,4],2])}")
 print('-' * 120)
 
 #   IsEqS : 2 list of list -> boolean
 #       {IsEqS(s1,s2) true jika s1 = s2}
-def IsEqS(s1,s2) :
+def IsEqS(s1, s2) :
     if IsEmpty(s1) and IsEmpty(s2) :
         return True
+    elif IsEmpty(s1) or IsEmpty(s2) :
+        return False
     else :
-        if IsEmpty(s1) and not IsEmpty(s2) :
-           return False
-        else :
-            if not IsEmpty(s1) and IsEmpty(s2) :
-                return False
+        if isAtom(FirstList(s1)) and isAtom(FirstList(s2)) :
+            if FirstList(s1) == FirstList(s2) :
+                return IsEqS(TailList(s1), TailList(s2))
             else :
-                if isAtom(FirstList(s1)) and isAtom(FirstList(s2)) :
-                    if FirstList(s1) == FirstList(s2) :
-                        return IsEqS(TailList(s1),TailList(s2))
-                    else :
-                        return False
-                else :
-                    if isList(FirstList(s1)) and isList(FirstList(s2)) :
-                        return IsEqS(FirstList(s1),FirstList(s2)) and IsEqS(LastList(s1),LastList(s2))
-                    else :
-                        return False
+                return False
+        elif isList(FirstList(s1)) and isList(FirstList(s2)) :
+            return IsEqS(FirstList(s1), FirstList(s2)) and IsEqS(TailList(s1), TailList(s2))
+        else :
+            return False
                     
-print(f"IsEqS : {IsEqS([[2,3],2,3,4],[2,3,[2,3],4])}")
+print(f"IsEqS : {IsEqS([],[])}")
+print(f"IsEqS : {IsEqS([1,2],[1,2])}")
+print(f"IsEqS : {IsEqS([[1,2],3],[[1,2],3])}")
 print('-' * 120)
 
 #   IsmemberS : elemen, list of list -> boolean
@@ -157,7 +178,9 @@ def IsMemberS(x, S) :
         else :
             return IsMemberS(x, FirstList(S)) or IsMemberS(x, TailList(S))
         
-print(f"IsMemberS : {IsMemberS(1,[1,2,[3,4,5],[6,7],[]])}")
+print(f"IsMemberS : {IsMemberS(3, [])}")
+print(f"IsMemberS : {IsMemberS(3, [2, 4, 3, [1], [4,5]])}")
+print(f"IsMemberS : {IsMemberS(3, [2, 4, 7, [1], [3,5]])}")
 print('-' * 120)
 
 #   Rember : elemen, list of list -> list of list
@@ -174,7 +197,9 @@ def Rember(x, S) :
         else :
             return KonsLo(Rember(x, FirstList(S)), Rember(x, TailList(S)))
 
-print(f"Rember : {Rember(4,[1,2,3,[1,2,4,4],4,[6,4]])}")
+print(f"Rember : {Rember(3, [])}")
+print(f"Rember : {Rember(3, [2, 4, [3,6,9], 5, 3])}")
+print(f"Rember : {Rember(3, [4, 3, [2,4], 3])}")
 print('-' * 120)
 
 #   Max: list of list -> elemen
@@ -192,6 +217,8 @@ def Max(S) :
             return Max(FirstList(S) + TailList(S)) 
 
 print(f"Max : {Max([4, 5, 6, [8,9,10], [12,0], 8])}")
+print(f"Max : {Max([4, 15, 6, [8,9,10], [12,0], 8])}")
+print(f"Max : {Max([])}")
 print('-' * 120)
 
 #   NBElmtAtom(S) : list of list -> integer
@@ -204,9 +231,11 @@ def NBElmtAtom(S) :
         if isAtom(FirstList(S)) :
             return 1 + NBElmtAtom(TailList(S))
         else :
-            return NBElmtAtom(FirstList(S)) + NBElmtAtom(TailList(S))
+            return NBElmtAtom(TailList(S))
         
-print(f"NBElmtAtom : {NBElmtAtom([4, 5, 6, [8,9,10], [12,0], 8,[]])}")
+print(f"NBElmtAtom : {NBElmtAtom([4, 5, 6, [8,9,10], [12,0], 8])}")
+print(f"NBElmtAtom : {NBElmtAtom([4, 15, 6, [8,9], 10, [12], 8])}")
+print(f"NBElmtAtom : {NBElmtAtom([[8,9,10]])}")
 print('-' * 120)
 
 #   NBElmtList : list of list -> integer
@@ -221,6 +250,8 @@ def NBElmtList(S) :
             return NBElmtList(TailList(S))
 
 print(f"NBElmtlist : {NBElmtList([4, 5, 6, [8,9,10], [12,0], 8])}")
+print(f"NBElmtlist : {NBElmtList([[4, 15], 6, [8,9], 10, [12], 8])}")
+print(f"NBElmtlist : {NBElmtList([[8,9,10]])}")
 print('-' * 120)
 
 #   SumLoL : list of list -> integer
@@ -234,7 +265,9 @@ def SumLoL(S) :
         else :
             return SumLoL(FirstList(S)) + SumLoL(TailList(S))
         
+print(f"SumLoL : {SumLoL([[]])}") 
 print(f"SumLoL : {SumLoL([4, 5, 6, [2,3,1]])}") 
+print(f"SumLoL : {SumLoL([[2,3,4]])}") 
 print('-' * 120)
 
 #   MaxNBElmtList : list of list -> integer
@@ -252,6 +285,8 @@ def MaxNBElmtList(S) :
             return MaxNBElmtList(TailList(S))
 
 print(f"MaxNBElmtList : {MaxNBElmtList([[4,5,6,7], [8,9,10], [12,0], 8])}")
+print(f"MaxNBElmtList : {MaxNBElmtList([[4,15], 6, [8,9], 10, [12], 8])}")
+print(f"MaxNBElmtList : {MaxNBElmtList([8,9,10])}")
 print('-' * 120)
 
 #   MaxSumElmt: list of list -> integer
@@ -272,6 +307,8 @@ def MaxSumElmt(S) :
                 return MaxSumElmt(TailList(S))
 
 print(f"MaxSumElmt : {MaxSumElmt([[1,2], 9, [4,5,6], 8])}")
+print(f"MaxSumElmt : {MaxSumElmt([[1,2], 90, [4,5,6], 8])}")
+print(f"MaxSumElmt : {MaxSumElmt([8,9,10])}")
 print('-' * 120)
 # dasdasdasdas
 
