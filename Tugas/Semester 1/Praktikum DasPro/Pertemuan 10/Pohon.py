@@ -1,63 +1,92 @@
 from lol import *
 
-#   makepn : elmt, pohon -> pohon
-#       {makepn(pn) buat bikin pohon}
-def makepn(a,pn) :
-    return [a,pn]
+#   DEFINISI DAN SPESIFIKASI TYPE
+#       Type elemen: {tergantung type node}
+#   Type Pohon-Ner : <A: Elemen, PN:Pohon-Ner> {notasi Prefix}
+#       {Pohon N-ner terdiri dari Akar yang berupa elemen dan list dari pohon N-aire yang menjadi anaknya List anak mungkin kosong, tapi pohon N-ner tidak pernah kosong karena minimal mempunyai sebuah elemen sehagai akar pohon.}
 
-# 
-def akar(pn) :
-    return pn[0]
+#   DEFINISI DAN SPESIFIKASI KONSTRUKTOR
+def MakePN(A,PN):
+    return [A,PN]
 
-def anak(pn) :
-    return pn[1]
+#   DEFINISI DAN SPESIFIKASI SELEKTOR
+#   Akar : PohonN-ner tidak  kosong  -→  Elemen  
+#       {Akar(P) adalah Akar dari P. Jika P adalah (A,PN) = Akar(P)adaLah A.}  
+def akar(PN):
+    return PN[0]
 
-def istreeempty(pn) :
-    return pn == []
+ #  Anak  :  PohonN-ner  tidak  kosong  →  List  of  PohonN-  ner  
+ #      {Anak(P) adalah List  of pohon N-ner yang merupakan anak-anak (sub phon) dari P. Jika P adalah (A,PN) = Anak  (P) adalah PN.}
+def anak(PN):
+    return PN[1]
 
-def isoneelmt(pn) :
-    return (istreeempty(pn) == False) and (istreeempty(anak(pn)) == True)
+#   DEFINISI DAN SPESOFIKASI PRDIKAT
+#   IsTreeNEmpty. PohonN-ner -→ boolean
+#       {Is Tree NEmptyIsTreeNEmpty(PN) true jika PN kosong []}
+def IsTreeNEmpty(PN):
+    return PN == []
 
-def nbnelmt(pn) :
-    if istreeempty(pn) :
+#   IsOneElmt: PohonN-ner -→ boolean
+#       {IsOne Elmt(PN) true jika PN hanya terdiri dari Akar}
+def IsOneElmt(PN):
+    return not IsTreeNEmpty(PN)  and IsTreeNEmpty(anak(PN))
+
+#   DEFINISI DAN SPESIFIKASI OPERATOR
+#   NbNElmt PohonN-ner -→ integer >= 0
+#       {NbNElmt(PN) memberikan banyaknya node dari pohon PN}
+#   Basis 1 NbNElmt ((A)\)=1
+#   Rekurens NbNElmt ((A,PN))= 1 + NbNElmt(PN)}
+
+def NbNElmt(PN):
+    if IsTreeNEmpty(PN):
         return 0
-    elif isoneelmt(pn) :
+    elif IsOneElmt(PN):
         return 1
-    else :
-        return 1 + nbnelmt(anak(pn)[0]) + nbelmtchild(anak(pn)[1:])
+    else:
+        return 1 + NbNElmt(anak(PN)[0]) + NbElmntChild(anak(PN)[1:])
     
-def nbelmtchild(pn) :
-    if istreeempty(pn) :
+#   Fungsi tambahan untuk menghitung jumlah elemen pada sisa anak-anak
+def NbElmntChild(PN):
+    if IsTreeNEmpty(PN):
         return 0
-    else :
-        return nbnelmt(pn[0]) + nbelmtchild(pn[1:])
+    else:
+        return NbNElmt(PN[0]) + NbElmntChild(PN[1:])
     
-def nbdaun(pn) :
-    if istreeempty(pn) :
+#   NbDaun PohonN-ner -→ integer >= 0
+#       {NbDaun(PN) memberikan banyaknya daun dari pohon PN}
+#   Basis 1 NbDaun ((A)\)=1
+#   Rekurens NbDaun ((A,PN)) = NbDaun(PN)}
+
+def NbDaun(PN):
+    if IsTreeNEmpty(PN):
         return 0
-    if isoneelmt(pn) and istreeempty(anak(pn)) :
+    elif IsOneElmt(PN) and IsTreeNEmpty(anak(PN)):
         return 1
-    else :
-        return nbdaunchild(anak(pn))
+    else:
+        return NbDaunChild(anak(PN))
 
-def nbdaunchild(pn) :
-    if istreeempty(pn) :
+#   Fungsi tambahan untuk menghitung jumlah daun pada sisa anak-anak
+def NbDaunChild(PN):
+    if IsTreeNEmpty(PN):
         return 0
-    else :
-        return nbdaun(pn[0]) + nbdaunchild(pn[1:])
-
-Wee = makepn(2,[])
-Woo = makepn('A', [makepn( 'B', [makepn( 'D', []),makepn('E', []), makepn( 'F', [])]) , makepn( 'C', [makepn( 'G', []) ,makepn('H', [makepn('I', [1])])]) ])
+    
+    else:
+        return NbDaun(PN[0]) + NbDaunChild(PN[1:])
 
 
+Wee = MakePN(1,[])
+Woo = MakePN(1,[MakePN(2,[MakePN(3,[]),MakePN(4,[])])])
+
+print('-' * 120)
 print(Wee) # [2,[]]
 print('-' * 120)
-print(istreeempty(Wee)) # False
+print(IsTreeNEmpty(Wee)) # False
 print('-' * 120)
-print(isoneelmt(Wee)) # True
+print(IsOneElmt(Wee)) # True
 print('-' * 120)
 print(Woo) 
 print('-' * 120)
-print(nbnelmt(Woo))
+print(NbNElmt(Woo))
 print('-' * 120)
-print(nbdaun(Woo))
+print(NbDaun(Woo))
+print('-' * 120)
