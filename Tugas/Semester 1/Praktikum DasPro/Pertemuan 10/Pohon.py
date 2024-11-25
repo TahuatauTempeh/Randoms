@@ -1,3 +1,10 @@
+#   Nama File   = Tree
+#   Nama        = Azka A. Maulana
+#   NIM         = 24060124140195
+#   Tanggal     = 22 Novembre 2024 (when it's written)
+#   Deskripsi   = tree itu pohon
+
+
 from lol import *
 
 #   DEFINISI DAN SPESIFIKASI TYPE
