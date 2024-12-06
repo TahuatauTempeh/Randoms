@@ -190,7 +190,7 @@ def IsPalindrom(L):
 # print(f"Konkat nya : {Konkat([2,4,6,7],[1,2,3,4])}")
 # print(f"Hasil tambah dari anggota list : {SumElmt([2,3,1])}")
 # print(f"Rata rata : {AvgElmt([2,3,4])}")
-# print(f"Nilai tertinggi : {MaxElmt([3,2,1])}")
+# print(f"Nilai tertinggi : {MaxElmt([3,9,1])}")
 # print(f"Hasil : {MaxNB([3, 5, 5, 2, 5, 1])}")  
 # print(f"Hasil tambah dua list : {AddList([2,3,6],[1,2])}")
 # print(f"Apakah berikut termasuk palindrom : {IsPalindrom(['R', 'U', 'S', 'A', 'K'])}")
