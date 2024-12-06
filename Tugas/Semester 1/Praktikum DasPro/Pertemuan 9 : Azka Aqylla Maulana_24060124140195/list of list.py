@@ -70,7 +70,7 @@ print('-' * 120)
 def isAtom(s) :
     return type(s) != list
 
-print(f"IsAtom : {isAtom(FirstList([3,2,3]))}")
+print(f"IsAtom : {isAtom(FirstList(['a',2,3]))}")
 print(f"IsAtom : {isAtom(FirstList([[3,5,7],2,3]))}")
 print(f"IsAtom : {isAtom(FirstList([3,[2,7],3]))}")
 print('-' * 120)
